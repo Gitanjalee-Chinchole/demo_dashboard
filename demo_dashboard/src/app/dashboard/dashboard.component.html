@@ -1,0 +1,82 @@
+<div class="section" style="margin: 05%">
+
+  <div class="row">
+    <div class="col-md-2">
+      <button class="openbtn" (click)="openNav()">☰ Toggle Sidebar</button>  
+    </div>
+    <div class="col-md-10">
+      <div class="row">
+        <div style="width: 100%;">
+          <select name="option" id="option" style="width: 100%;" [(ngModel)]="domain">
+            <option value="">Select</option>
+            <option value="domain1">Domain 1</option>
+            <option value="domain2">Domain 2</option>
+          </select>
+        </div>
+
+      </div>
+
+      <div class="content" *ngIf="domain != ''">
+
+        <div class="row">
+          <div class="col-md-6">
+            <canvas baseChart [data]="pieChartData" [labels]="pieChartLabels" [options]="piechartOptions" [chartType]="pieChartType"
+              (chartHover)="chartHovered($event)" (chartClick)="chartClicked($event)"></canvas>
+          </div>
+          <div class="col-md-6">
+            <canvas baseChart width="400" height="200" [datasets]="barChartData" [options]="barChartOptions"
+              [chartType]="barChartType" [labels]="barChartLabels"></canvas>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <table class="table table-striped ">
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Count</th>
+                  <th>Domain</th>
+                  <th>Wishes</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of firstTableData">
+                  <td> {{ item.name }} </td>
+                  <td> <span title="click to get details" (click)="getDetails(item.name)">{{ item.count }}</span> </td>
+                  <td> {{ item.domain }} </td>
+                  <td>{{ item.wishes }}</td>
+                </tr>
+                <tr *ngIf = 'secondTableShow'>
+                  <td colspan="4">
+                    <div class="span9">
+                        <div class="pull-right">
+                            <table class="table table-hover table-condensed table-striped">
+                                <thead class="levelTwo">
+                                    <tr>
+                                        <th>Date</th>
+                                        <th>Cost</th>
+                                        <th>Sales</th>
+                                        <th>Total Employees</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let day of dayData">
+                                        <td>{{day.date}}</td>
+                                        <td>{{day.cost}}</td>
+                                        <td>{{day.sales}}</td>
+                                        <td>{{day.employeesHoursSum}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
